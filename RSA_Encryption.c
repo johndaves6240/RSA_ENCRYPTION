@@ -1,58 +1,58 @@
 #include<stdio.h>
 #include<math.h>
 
-void encrypt(char text[], char alphabet[], int enc, int n);
-void decrypt(char text[], char alphabet [], int enc, int n);
+void encrypt(char text[], int enc, int n);
+void decrypt(char text[], int d, int n);
+
+double mod(double a, double b);
 
 int main(){
 	
-	int p=5, q=7, e=5, d=29, n=35, count=0, j=0;
-	int i;
-	int change;
-	int mod;
-
-	
-	char alphabet[27]= {'0','A', 'B', 'C', 'D', 'E', 'F', 'G', 
-						'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
-						 'R', 'S', 'T', 'U', 'V' ,'W', 'X', 'Y', 'Z'};
+	int p=11, q=13, e=7, d=223, n=143, count=0, j=0;
+	double change;
 						 
-	char text[100]="LOVEEE";
+	char text1[100]="ENCRYPTION";
+	printf("ENCRYPTING THE WORD: %s\n", text1);
+	encrypt(text1, e,n);
+	printf("AFTER ENCRYPTION: %s\n", text1);
+	decrypt(text1,d,n);
+	printf("AFTER DECRYPTION: %s\n", text1);
 	
-	printf("ENCRYPTING THE WORLD: %s\n", text);
-	
-	encrypt(text,alphabet, e,n);
-	printf("AFTER ENCRYPTION: %s\n", text);
-	
-	decrypt(text,alphabet, e,n);
-	printf("AFTER DECRYPTION: %s\n", text);
+	char text2[100]="RASTAMAN";
+	printf("\n\nENCRYPTING THE WORD: %s\n", text2);
+	encrypt(text2, e,n);
+	printf("AFTER ENCRYPTION: %s\n", text2);
+	decrypt(text2,d,n);
+	printf("AFTER DECRYPTION: %s\n", text2);
+
 	
 	return 0;
 
 }	
-void decrypt(char text[], char alphabet [], int enc, int n){
-		int i, change, mod, j;
-	
-	for(i=0; text[i]!='\0';i++){
-		for(j=1; alphabet[j]!=text[i];j++){}
-	 change= (int)(pow(j, enc));
-	 mod=change % n;
 
-	 
-	 text[i]= alphabet[mod];
-	 		
-	}
+void decrypt(char text[], int d, int n){
+	int  c=1,i,m, base, exp;
+	
+	for(i=0,m=1,c=text[i],base=c,exp=d;text[i]!='\0';i++,m=1,c=text[i],base=c,exp=d){
+        while(exp){
+            if(exp%2){
+                m=(base*m)%n;
+            }
+            base=(base*base)%n;
+            exp/=2;
+        }
+        text[i]=m;
+    }
 	
 }
-void encrypt(char text[], char alphabet [], int enc, int n){
+void encrypt(char text[], int enc, int n){
 	int i, change, mod, j;
 
 	
 	for(i=0; text[i]!='\0';i++){
-		for(j=1; alphabet[j]!=text[i];j++){}
-	 change= (int)(pow(j, enc));
-	 mod=change % n;
+	 change= fmod((pow(text[i], enc)),n);
 	 
-	 text[i]= alphabet[mod];
+	 text[i]= change;
 	 		
 	}
 }
