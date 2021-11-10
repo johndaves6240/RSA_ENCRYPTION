@@ -10,13 +10,24 @@ int main(){
 	
 	int p=11, q=13, e=7, d=223, n=143, count=0, j=0;
 	double change;
-						 
+	
+//RESULTS:
+//		ENCRYPTING THE WORD: ENCRYPTION
+//		AFTER ENCRYPTION: lNYECÏHS(N
+//		AFTER DECRYPTION: ENCRY±TION    //( THE "P" letter somehow become a "positive-negative" character )
+			
+		
 	char text1[100]="ENCRYPTION";
 	printf("ENCRYPTING THE WORD: %s\n", text1);
 	encrypt(text1, e,n);
 	printf("AFTER ENCRYPTION: %s\n", text1);
 	decrypt(text1,d,n);
 	printf("AFTER DECRYPTION: %s\n", text1);
+	
+//RESULTS:
+//		ENCRYPTING THE WORD: RASTAMAN
+//		AFTER ENCRYPTION: EHAMAN
+//		AFTER DECRYPTION: RASTAMAN	
 	
 	char text2[100]="RASTAMAN";
 	printf("\n\nENCRYPTING THE WORD: %s\n", text2);
